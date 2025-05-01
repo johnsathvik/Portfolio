@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manage Skills</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    .highlight {
+      color: #E87532;
+    }
+    .btn-primary {
+      background-color: #E87532;
+      border-color: #E87532;
+    }
+    .btn-primary:hover {
+      background-color: #cc5e24;
+      border-color: #cc5e24;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #ffffff;
+      border-right: 1px solid #dee2e6;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      color: #000000;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: block;
+      font-weight: 500;
+    }
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #E87532;
+      color: #ffffff;
+      border-radius: 5px;
+    }
+    .card-header {
+      background-color: #E87532;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="position-sticky">
+                <h4 class="text-center highlight">Admin Panel</h4>
+                <hr>
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin-home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin-about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin-experience">Experience</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin-education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin-contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+      <main class="col-md-10 py-4">
+        <h1 class="highlight mb-4">Manage Home Section</h1>
+
+        <!-- Add New Skill Modal -->
+        <div class="modal fade" id="addSkillModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <form method="post" action="{{ url_for('admin_intro') }}">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title highlight">Add New Skill</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="newSkill" class="form-label">Skill Title</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="newSkill"
+                      name="new_skill"
+                      placeholder="e.g. DevOps Engineer"
+                      required
+                    >
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Save Skill</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+        <!-- ─────────────── Edit Skill Modal ─────────────── -->
+        <div class="modal fade" id="editSkillModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <form method="post" action="{{ url_for('admin_intro') }}">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title highlight">Edit Skill</h5>
+                  <button type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- hidden index, and pre-filled text input -->
+                  <input type="hidden" name="edit_index" id="editSkillIndex">
+                  <div class="mb-3">
+                    <label for="editedSkill" class="form-label">Skill Title</label>
+                    <input type="text"
+                           class="form-control"
+                           id="editedSkill"
+                           name="edited_skill"
+                           required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" name="action" value="update" class="btn btn-primary">
+                    Update Skill
+                  </button>
+                  <button type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- ────────────────────────────────────────────────── -->
+
+
+        <!-- Delete Skill Confirmation Modal -->
+        <div class="modal fade" id="deleteSkillModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <form method="post" action="{{ url_for('admin_intro') }}">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title highlight">Confirm Delete</h5>
+                  <button type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete this skill?
+                  <input type="hidden" name="delete_index" id="deleteSkillIndex">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                  <button type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+        <!-- Skills Table -->
+        <div class="card mt-4">
+          <div class="card-header">Current Skills</div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped mb-3">
+                <thead class="table-light">
+                  <tr>
+                    <th>Skill Title</th>
+                    <th style="width:120px">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for skill in skills %}
+                <tr>
+                  <td>{{ skill }}</td>
+                  <td>
+                    <!-- add data-attrs and modal triggers here: -->
+                    <button class="btn btn-sm btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-index="{{ loop.index0 }}" data-title="{{ skill }}">Edit</button>
+                    <button class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteSkillModal" data-index="{{ loop.index0 }}">Delete</button>
+                  </td>
+                </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="2" class="text-center">No skills found.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSkillModal"> Add New Skill</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ─────────────── Manage Bio Section ─────────────── -->
+        <div class="card mt-5">
+          <div class="card-header">Manage Bio</div>
+          <div class="card-body">
+            <p id="bioText">{{ bio }}</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBioModal" data-bio="{{ bio|e }}">Edit Bio</button>
+          </div>
+        </div>
+
+        <!-- Edit Bio Modal -->
+        <div class="modal fade" id="editBioModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <form method="post" action="{{ url_for('admin_intro') }}">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title highlight">Edit Bio</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="editedBio" class="form-label">Bio</label>
+                    <textarea
+                      class="form-control"
+                      id="editedBio"
+                      name="edited_bio"
+                      rows="4"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">
+                    Save Bio
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- ──────────────────────────────────────────────────── -->
+
+
+
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle (with Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const editModal = document.getElementById('editSkillModal');
+  editModal.addEventListener('show.bs.modal', event => {
+    // the button that triggered the modal
+    const btn = event.relatedTarget;
+    const idx = btn.getAttribute('data-index');
+    const title = btn.getAttribute('data-title');
+
+    // populate the form inputs
+    editModal.querySelector('#editSkillIndex').value = idx;
+    editModal.querySelector('#editedSkill').value = title;
+  });
+</script>
+
+<script>
+  // delete‐modal with the index from whichever Delete button was clicked
+  const deleteModal = document.getElementById('deleteSkillModal');
+  deleteModal.addEventListener('show.bs.modal', event => {
+    const btn = event.relatedTarget;
+    const idx = btn.getAttribute('data-index');
+    deleteModal.querySelector('#deleteSkillIndex').value = idx;
+  });
+</script>
+
+<script>
+  const editBioModal = document.getElementById('editBioModal');
+  editBioModal.addEventListener('show.bs.modal', event => {
+    // event.relatedTarget is the button that opened the modal
+    const btn = event.relatedTarget;
+    const currentBio = btn.getAttribute('data-bio') || '';
+    // find the textarea inside the modal and set its value
+    editBioModal.querySelector('#editedBio').value = currentBio;
+  });
+</script>
+
+</body>
+</html>
