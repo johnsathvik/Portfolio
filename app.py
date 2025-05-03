@@ -9,7 +9,8 @@ def home():
 
     landing_data = fb.get('/landing', None)
     about_data = fb.get('/about', None)
-    resume_data = fb.get('/resume', None)
+    experience_data = fb.get('/experience', None) or {}
+    education_data = fb.get('/resume/education', None) or {}
     links = fb.get(f'https://portfolio-536e2-default-rtdb.firebaseio.com/links/-OOvwHeVJtSsrjh3QnWR/links', None)
 
     #get landing data
@@ -45,7 +46,16 @@ def home():
     about_skills = []
     for block in about.get('skills', {}).values():
         about_skills.extend(block.get('skills', []))
+    
 
+    return render_template(
+        'index.html',
+        skills=skills,
+        bio=bio,
+        about_skills=about_skills,
+        experiences=experience_data,  # ✅ Pass to frontend
+        education=education_data
+    )
 
     #get resume_data
 
@@ -73,9 +83,23 @@ def contact():
         return "OK"
 
 
-@app.route('/admin-login', methods=["GET","POST"])
+@app.route('/admin-login', methods=["GET", "POST"])
 def admin_login():
-    return render_template('/admin-module/admin-login.html')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        links = fb.get('/links/-OOvwHeVJtSsrjh3QnWR/links', None)
+        stored_username = links.get('admin_username')
+        stored_password = links.get('admin_password')
+
+        if username == stored_username and password == stored_password:
+            return redirect(url_for('admin_intro'))
+        else:
+            return render_template('admin-module/admin-login.html', error="Invalid username or password.")
+    
+    return render_template('admin-module/admin-login.html')
+
 
 
 @app.route('/admin-home', methods=['GET','POST'])
@@ -258,19 +282,126 @@ def admin_about():
     )
 
 
-@app.route('/admin-experience', methods=["GET","POST"])
-def admin_portal():
-    return render_template('admin-module/admin-experience.html')
+@app.route('/admin-experience', methods=["GET", "POST"])
+def admin_experience():
+    edit_data = None
+
+    if request.method == "POST":
+        # Handle Edit request
+        if 'edit_key' in request.form:
+            key = request.form['edit_key']
+            edit_data = fb.get(f'/experience/{key}', None)
+            edit_data['key'] = key  # Include the key for the update
+        # Handle Update submission
+        elif 'update_key' in request.form:
+            key = request.form['update_key']
+            updated = {
+                "company": request.form['company'],
+                "role": request.form['role'],
+                "duration": request.form['duration'],
+                "description": request.form['description']
+            }
+            fb.put('/experience', key, updated)
+            return redirect(url_for('admin_experience'))
+        # Handle Add new
+        else:
+            company = request.form.get("company")
+            role = request.form.get("role")
+            duration = request.form.get("duration")
+            description = request.form.get("description")
+            if company and role and duration and description:
+                fb.post('/experience', {
+                    "company": company,
+                    "role": role,
+                    "duration": duration,
+                    "description": description
+                })
+            return redirect(url_for('admin_experience'))
+
+    experiences = fb.get('/experience', None) or {}
+    return render_template('admin-module/admin-experience.html', experiences=experiences, edit_data=edit_data)
 
 
-@app.route('/admin-education', methods=["GET","POST"])
+@app.route('/delete-experience', methods=['POST'])
+def delete_experience():
+    key = request.form.get('key')
+    if key:
+        fb.delete('/experience', key)
+    return redirect(url_for('admin_experience'))
+
+
+
+@app.route('/admin-education', methods=["GET", "POST"])
 def admin_education():
-    return render_template('admin-module/admin-education.html')
+    edit_data = None
+
+    if request.method == "POST":
+        # Edit button clicked
+        if 'edit_key' in request.form:
+            key = request.form['edit_key']
+            edit_data = fb.get(f'/resume/education/{key}', None)
+            if edit_data:
+                edit_data['key'] = key
+
+        # Update button submitted
+        elif 'update_key' in request.form:
+            key = request.form['update_key']
+            updated = {
+                "institution": request.form['institution'],
+                "designation": request.form['designation'],
+                "period": request.form['period'],
+                "description": request.form['description']
+            }
+            fb.put('/resume/education', key, updated)
+            return redirect(url_for('admin_education'))
+
+        # Add new entry
+        else:
+            institution = request.form.get("institution")
+            designation = request.form.get("designation")
+            period = request.form.get("period")
+            description = request.form.get("description")
+
+            if institution and designation and period and description:
+                fb.post('/resume/education', {
+                    "institution": institution,
+                    "designation": designation,
+                    "period": period,
+                    "description": description
+                })
+
+            return redirect(url_for('admin_education'))
+
+    education = fb.get('/resume/education', None) or {}
+    return render_template(
+        'admin-module/admin-education.html',
+        education=education,
+        edit_data=edit_data
+    )
 
 
-@app.route('/admin-contact', methods=["GET","POST"])
+
+@app.route('/delete-education', methods=["POST"])
+def delete_education():
+    key = request.form.get('key')
+    if key:
+        fb.delete('/resume/education', key)
+    return redirect(url_for('admin_education'))
+
+
+
+@app.route('/admin-contact', methods=["GET", "POST"])
 def admin_contact():
-    return render_template('admin-module/admin-contact.html')
+    if request.method == "POST":
+        # Delete functionality
+        contact_id = request.form.get("delete_id")
+        if contact_id:
+            fb.delete('/contacts', contact_id)
+            return redirect(url_for('admin_contact'))
+
+    # Fetch all contacts
+    contacts = fb.get('/contacts', None) or {}
+    return render_template('admin-module/admin-contact.html', contacts=contacts)
 
 
 @app.route('/logout')
