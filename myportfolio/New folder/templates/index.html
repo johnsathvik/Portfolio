@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>John Sathvik Madipalli</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{{url_for('static',filename='assets/img/favicon.png')}}" rel="icon">
+  <link href="{{url_for('static',filename='assets/img/apple-touch-icon.png')}}"rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{url_for('static',filename='assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static',filename='assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{url_for('static',filename='assets/css/main.css')}}" rel="stylesheet">
+  <style>
+    #secret-admin-button {
+      position: fixed;
+      bottom: 12px;
+      left: 12px; /* bottom-left  */
+      width: 30px;
+      height: 30px;
+      opacity: 0.5;
+      z-index: 9999;
+      cursor: pointer;
+      background-color: transparent;
+    }
+  
+    /* Optional: highlight it slightly on hover for dev/testing */
+    #secret-admin-button:hover {
+      opacity: 0.15;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+    }
+  </style>
+  
+
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href= "/" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">John Sathvik Madipalli</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+          <!-- <li><a href="#services">Services</a></li>
+           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Dropdown 2</a></li>
+              <li><a href="#">Dropdown 3</a></li>
+              <li><a href="#">Dropdown 4</a></li>
+            </ul>
+          </li> -->
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="https://www.linkedin.com/in/johnsathvik" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/johnsathvik" class="github" target="_blank"><i class="bi bi-github"></i></a>
+        <!-- <a href="#" class="facebook"><i class="bi bi-facebook" target="_blank"></i></a> -->
+        <!-- <a href="#" class="instagram"><i class="bi bi-instagram" target="_blank"></i></a> -->
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section" style="background-color: #ffffff;">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row align-items-center content">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+            <h2>
+              <span style="color: #EB8951;">I'm</span><br>
+              <span id="typed-text" style="color: #1f2d3d;"></span>
+            </h2>
+            <p class="lead">{{ bio }}</p>
+            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
+              <a href="#resume" class="btn btn-primary">View My Work</a>
+              <a href="#contact" class="btn btn-outline">Let's Connect</a>
+            </div>
+            <!-- <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+              <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Projects Completed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+            </div> -->
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-image">
+              <img src="{{url_for('static',filename='assets/img/profile/7090038.jpg')}}" alt="Portfolio Hero Image" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
+              <!-- <div class="shape-1"></div>
+              <div class="shape-2"></div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section light-background">
+
+      <!-- Section Title -->
+      <!--<div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <div class="title-shape">
+          <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+        </div>
+        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem</p>
+      </div>--><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- <div class="row align-items-center">
+          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
+            <div class="about-image">
+              <img src="{{url_for('static',filename='assets/img/profile/profile-square-2.webp')}}" alt="Profile Image" class="img-fluid rounded-4">
+            </div>
+          </div> -->
+
+          <div class="container" data-aos="fade-up">
+            <div class="section-title">
+              <h2>About Me</h2>
+              <div class="title-shape">
+                <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10"
+                        fill="none" stroke="currentColor" stroke-width="2"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-lg-12" data-aos="fade-left" data-aos-delay="300">
+                <div class="about-content">
+                  <h3 class="fw-bold">Turning Code Into Scalable Web Apps, Cloud Platforms & Smart Systems</h3>
+                  <br>
+                  <p class="lead mb-4">
+                    I’m John Sathvik Madipalli, a passionate software developer, full-stack enthusiast, and aspiring AWS Solutions Architect currently pursuing my Master’s in Information Systems at Saint Louis University.
+                    With hands-on experience in web development, cloud deployment, automation, and AI/ML integration, I specialize in creating scalable and intuitive digital solutions.
+                    From co-founding a startup and building client-focused web applications using Flask and JavaScript, to deploying cloud-based systems with AWS and enhancing QA pipelines,
+                    I bring a blend of technical skill and real-world insight to every project I undertake. I enjoy turning complex problems into elegant, user-friendly solutions that are both impactful and efficient.
+                  </p>
+                  <!-- <p class="mb-4">With a passion for solving real-world problems through design and technology, I craft elegant solutions that scale and inspire.</p> -->
+                  <!-- <div class="personal-info">
+                    <div class="row g-4">
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Name</span>
+                          <span class="value">John Sathvik Madipalli</span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Phone</span>
+                          <span class="value">+91 98765 43210</span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Age</span>
+                          <span class="value">23 Years</span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Email</span>
+                          <span class="value">john@example.com</span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Occupation</span>
+                          <span class="value">Software Engineer</span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="info-item">
+                          <span class="label">Nationality</span>
+                          <span class="value">Indian</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /About Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-4 skills-animation">
+
+        {% for skill1 in about_skills %}
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ 100 + loop.index0 * 100 }}">
+        <div class="skill-box">
+          <h3>{{ skill1.Skill }}</h3>
+          <p>{{ skill1.Description }}</p>
+          <span class="text-end d-block">{{ skill1.percentage }}%</span>
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              style="width: {{ skill1.percentage }}%;"
+              aria-valuenow="{{ skill1.percentage }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+
+        </div>
+
+      </div>
+
+    </section><!-- /Skills Section -->
+
+   <!-- Resume Section -->
+   <section id="resume" class="resume section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Resume</h2>
+      <div class="title-shape">
+        <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+      </div>
+      <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="resume-wrapper">
+            <div class="resume-block" data-aos="fade-up">
+              <h2>Work Experience</h2>
+              <p class="lead">Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet adipiscing sem neque sed ipsum.</p>
+
+              <div class="timeline">
+                {% for key, exp in experiences.items() %}
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="{{ 200 + loop.index0 * 100 }}">
+                  <div class="timeline-left">
+                    <h4 class="company">{{ exp.company }}</h4>
+                    <span class="period">{{ exp.duration }}</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">{{ exp.role }}</h3>
+                    <p class="description">{{ exp.description }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              
+
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="100">
+              <h2>My Education</h2>
+              <p class="lead">Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet adipiscing.</p>
+
+              <div class="timeline">
+                {% for key, edu in education.items() %}
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="{{ 200 + loop.index0 * 100 }}">
+                  <div class="timeline-left">
+                    <h4 class="company">{{ edu.institution }}</h4>
+                    <span class="period">{{ edu.period }}</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">{{ edu.designation }}</h3>
+                    <p class="description">{{ edu.description }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>                           
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section
+    
+
+    <!-- Portfolio Section -->
+    <!-- <section id="portfolio" class="portfolio section"> -->
+
+      <!-- Section Title -->
+      <!-- <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <div class="title-shape">
+          <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+        </div>
+        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem</p>
+      </div>End Section Title -->
+
+      <!-- <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
+            <ul class="portfolio-filters isotope-filters">
+              <li data-filter="*" class="filter-active">All Work</li>
+              <li data-filter=".filter-web">Web Design</li>
+              <li data-filter=".filter-graphics">Graphics</li>
+              <li data-filter=".filter-motion">Motion</li>
+              <li data-filter=".filter-brand">Branding</li>
+            </ul>
+          </div>
+
+          <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
+
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-1.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-1.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Web Design</span>
+                  <h3>Modern Dashboard Interface</h3>
+                  <p>Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis.</p>
+                </div>
+              </div>
+            </div>End Portfolio Item -->
+
+            <!-- <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-10.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-10.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='templates/portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Graphics</span>
+                  <h3>Creative Brand Identity</h3>
+                  <p>Vestibulum id ligula porta felis euismod semper at vulputate.</p>
+                </div>
+              </div>
+            </div> End Portfolio Item -->
+
+            <!-- <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-motion">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-7.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-7.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='templates/portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Motion</span>
+                  <h3>Product Animation Reel</h3>
+                  <p>Donec ullamcorper nulla non metus auctor fringilla dapibus.</p>
+                </div>
+              </div>
+            </div>End Portfolio Item -->
+
+            <!-- <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-brand">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-4.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-4.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-brand"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='templates/portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Branding</span>
+                  <h3>Luxury Brand Package</h3>
+                  <p>Aenean lacinia bibendum nulla sed consectetur elit.</p>
+                </div>
+              </div>
+            </div>End Portfolio Item -->
+
+            <!-- <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-2.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-2.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='templates/portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Web Design</span>
+                  <h3>E-commerce Platform</h3>
+                  <p>Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>End Portfolio Item -->
+
+            <!-- <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="{{url_for('static',filename='assets/img/portfolio/portfolio-11.webp')}}" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="{{url_for('static',filename='assets/img/portfolio/portfolio-11.webp')}}" class="glightbox preview-link" data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
+                      <a href="{{url_for('static',filename='templates/portfolio-details.html')}}" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Graphics</span>
+                  <h3>Digital Art Collection</h3>
+                  <p>Cras mattis consectetur purus sit amet fermentum.</p>
+                </div>
+              </div>
+            </div> End Portfolio Item -->
+
+          </section><!-- End Portfolio Container -->
+
+        <!-- </div>
+
+      </div>
+
+    </section>Portfolio Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" style="padding-top: 60px; padding-bottom: 30px;">
+      <div class="container" style="max-width: 1170px;" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Contact</h2>
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10"
+                    fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <div class="d-lg-flex gap-4 align-items-stretch p-4 p-lg-5"
+            style="background: linear-gradient(to right, #ffffff, #ffffff); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+
+              <!-- Left Column: Contact Info -->
+              <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="d-flex mb-4">
+                  <div class="me-3">
+                    <i class="bi bi-linkedin rounded-circle p-2 bg-light" style="color: #0e76a8; font-size: 24px;"></i>
+                  </div>
+                  <div>
+                    <h5>LinkedIn</h5>
+                    <a href="www.linkedin.com/in/johnsathvik" target="_blank">linkedin.com/in/johnsathvik</a>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="me-3">
+                    <i class="bi bi-envelope rounded-circle p-2 bg-light" style="color: #d93025; font-size: 24px;"></i>
+                  </div>
+                  <div>
+                    <h5>Email</h5>
+                    <a href="mailto:johnsathvik@gmail.com">johnsathvik@gmail.com</a>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="me-3">
+                    <i class="bi bi-telephone rounded-circle p-2 bg-light" style="color: #f26c20; font-size: 24px;"></i>
+                  </div>
+                  <div>
+                    <h5>Call</h5>
+                    <a href="tel:+1(314)760-5381">+1(314)760-5381</a>
+                  </div>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="me-3">
+                    <i class="bi bi-telegram rounded-circle p-2 bg-light" style="color: #0088cc; font-size: 24px;"></i>
+                  </div>
+                  <div>
+                    <h5>Telegram</h5>
+                    <a href="https://t.me/Ricky1517" target="_blank">t.me/John Sathvik</a>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="me-3">
+                    <i class="bi bi-whatsapp rounded-circle p-2 bg-light" style="color: #25d366; font-size: 24px;"></i>
+                  </div>
+                  <div>
+                    <h5>WhatsApp</h5>
+                    <a href="https://wa.me/+1 (314) 760-5381" target="_blank">wa.me/+1 (314) 760-5381</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Form -->
+              <div class="col-lg-6 d-flex justify-content-end">
+                <div style="width: 100%; max-width: 500px;">
+                  <form action="#" method="post" class="php-email-form">
+                    <div class="row gy-4">
+                      <div class="col-12">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                      </div>
+                      <div class="col-12">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                      </div>
+                      <div class="col-12">
+                        <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                      </div>
+                      <div class="col-12">
+                        <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
+                      </div>
+                      <div class="col-12 text-start">
+                        <button type="submit" class="btn btn-primary" style="background-color: #f26c20; border: none; width: 100%;">Submit Message</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">John Sathvik Madipalli</strong> </p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <!-- <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a> -->
+        <a href="https://www.linkedin.com/in/johnsathvik"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/johnsathvik" class="github" target="_blank"><i class="bi bi-github"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://www.linkedin.com/in/johnsathvik">John Sathvik Madipalli</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{url_for('static',filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{url_for('static',filename='assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{url_for('static',filename='assets/js/main.js')}}"></script>
+  <!-- Typed Script JS  -->
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // pull in the Python-passed list as a JS array
+    const skillStrings = {{ skills|tojson }};
+
+    new Typed('#typed-text', {
+      strings: skillStrings,
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      startDelay: 500,
+      loop: true
+    });
+  });
+  </script>
+
+<div id="secret-admin-button" onclick="window.location.href='http://127.0.0.1:5001/admin-login'"></div>
+
+</body>
+
+</html>
+
+
+
+
