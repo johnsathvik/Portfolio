@@ -90,37 +90,62 @@
 
 
         <!-- Main Content -->
-        <div class="container mt-5">
-            <h2 class="text-center mb-4">Contact Messages</h2>
-            <table class="table table-bordered">
-              <thead class="table-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Subject</th>
-                  <th>Message</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for key, msg in contacts.items() %}
-                <tr>
-                  <td>{{ msg.name }}</td>
-                  <td>{{ msg.email }}</td>
-                  <td>{{ msg.subject }}</td>
-                  <td>{{ msg.message }}</td>
-                  <td>
-                    <form method="POST" style="display:inline;">
-                      <input type="hidden" name="delete_id" value="{{ key }}">
-                      <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        <main class="col-md-10 ms-sm-auto px-md-4 my-4">
+            <h1 class="mb-4 highlight">Manage Experience</h1>
+
+            <!-- Form to Add/Edit Experience -->
+            <div class="card mb-5">
+                <div class="card-header">
+                    Add / Edit Experience
+                </div>
+                <div class="card-body">
+                    <form id="experienceForm">
+                        <div class="mb-3">
+                            <label for="institution" class="form-label">Institution/Company Name</label>
+                            <input type="text" class="form-control" id="institution" placeholder="Enter Institution Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="period" class="form-label">Period</label>
+                            <input type="text" class="form-control" id="period" placeholder="e.g. 2017-2019" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="designation" class="form-label">Designation / Title</label>
+                            <input type="text" class="form-control" id="designation" placeholder="Enter Designation" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Enter Short Description" required></textarea>
+                        </div>
+                        <input type="hidden" id="experienceId">
+                        <button type="submit" class="btn btn-primary">Save Experience</button>
                     </form>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          
+                </div>
+            </div>
+
+            <!-- Table to Display Experiences -->
+            <div class="card">
+                <div class="card-header">
+                    Experience List
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Institution</th>
+                                    <th>Period</th>
+                                    <th>Designation</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="experienceTable">
+                                <!-- Experience Rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
