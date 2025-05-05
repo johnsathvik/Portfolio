@@ -1,8 +1,46 @@
 from flask import Flask, render_template, request
 from firebase import firebase
+import smtplib
+from email.mime.text import MIMEText
+import requests
 
 app = Flask(__name__)
 fb = firebase.FirebaseApplication('https://portfolio-536e2-default-rtdb.firebaseio.com/', None)
+
+def send_telegram_message(name, email, subject, message):
+    #  bot token
+    bot_token = '7634605210:AAGV3zH26-TjdCx25AjrLO8SG9EuRhJZRPs'
+    chat_id = 914342868  # Target user's Telegram ID
+
+    # Compose one-line message
+    full_message = f"Name: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}"
+
+    # Telegram API URL
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+
+    # Payload for POST request
+    payload = {
+        'chat_id': chat_id,
+        'text': full_message
+    }
+
+    # Send the message
+    response = requests.post(url, data=payload)
+
+    # Handle response
+    if response.status_code == 200:
+        print("Message sent successfully.")
+        return True
+    else:
+        print(f"Failed to send message: {response.text}")
+        return False
+
+send_telegram_message(
+    name="name",
+    email="email",
+    subject="subject",
+    message="message"
+)
 
 @app.route('/')
 def home():
@@ -45,15 +83,18 @@ def home():
         whatsapp=whatsapp
     )
 
-@app.route('/contact', methods=["POST"])
+@app.route('/contact', methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         name = request.form.get('name')
         cli_email = request.form.get('email')
-        sub = request.form.get('subject')
+        subject = request.form.get('subject')
         message = request.form.get('message')
-        print(f"Contact from {name} ({cli_email}) - {sub}: {message}")
+        resp = send_telegram_message(name, cli_email, subject, message)
         return "OK"
+
+    return redirect(url_for('home'))
+
 
 if __name__ == "__main__":
     app.run(port=5000)
